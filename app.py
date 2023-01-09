@@ -1,5 +1,5 @@
 """ docstring: imports"""
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect,Response
 from persistencia import guardar_pedido
 
 app = Flask(__name__)
@@ -33,6 +33,16 @@ def pizza():
         print("parametro_1 (Nombre), parametro_2 (Apellidos): ")
         print(" " + parametro_1  + " "+ parametro_2)
         file.close()
-
 # Si todo bien redirige navegador a  pagina solicita_pedido.html
     return redirect("http://localhost/solicita_pedido.html", code=302)
+
+@app.route("/pizza", methods=['POST'])
+def checksize():
+    """ docstring: lComprueba disponibilidad de tamaño de pedido """
+    size = request.form.get("p6")
+    if size=="pequeña":
+        status = "No disponible"
+    else:
+        status = " disponible"
+
+    return Response(status,200,{'Access-Control-Allow-Origin':'*'})
