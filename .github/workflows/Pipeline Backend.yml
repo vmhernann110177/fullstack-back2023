@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -uses: actions/checkout@v2
-      -name: Install dependencies
-        run:|
-          python -m pip install --upgrade pip
-          pip install pylint pytest flask
-      -name2: Pylint
-        run:| pylint `ls -R|grep .py$|xargs`
-      -name3: Pytest
-        run:| pytest `ls -R|grep test_*.py$|xargs`
+      -name: Install dependencies multiline script
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint pytest flask
+      -name: Pylint
+        run:  pylint `ls -R|grep .py$|xargs`
+      -name: Pytest
+        run:  pytest `ls -R|grep test_*.py$|xargs`
